@@ -1,0 +1,190 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------Node JS------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------- CONCEITOS ----------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- O QUE É --
+
+Execução de JavaScript do lado do serivodr
+
+Interpretador JS V8
+
+Single Thead
+Non-blocking-io
+Call Stack
+
+Gerenciadores de pacote
+NPM Yarn
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- API Rest --
+
+- API
+
+    Interação entre aplicativos
+    possiveis interaçõpes entre aplicativos
+    documentação para desenvolvedor
+
+- Rest
+
+    transferencia representacional de estado
+    modelo de arquitetura
+
+    - cliente - server
+    - stateless
+    - cache
+    - interface uniforme 
+        - identificaç~çao de recursos
+        - representação de recursos
+        - mensagens auto descritivas
+        - hateoas - retornar links dentro da requisição
+    - camadas
+    - codigo sob demanda
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Métodos de requisição --
+
+GET - leitura
+POST - criação
+PUT - atualização
+DELETE - deleção
+PATCH - atualização parcial
+
+- HTTP codes
+
+    1xx - informativo
+    2xx - confirmação POST
+    3xx - redirecionamento
+    4xx - erro de cliente
+    5xx - erro no servidor
+
+Parametros das requisições
+
+    - Header Params
+    - query params
+    - route params
+    - body params
+
+Boas praticas API Rest
+
+    - ultilização correta dos metodos HTTP
+    - ultilização correta de status de retorno
+    - padrao nomenclatura
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------Node JS------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------- Configurando o projeto ---------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Criando a estrutura do projeto --
+
+yarn init -y
+
+yarn add express
+
+
+Express é um framework para aplicativo da web do Node.js mínimo e flexível que fornece um conjunto robusto de recursos para aplicativos web e móvel.
+
+O Express.js é um Framework rápido e um dos mais utilizados em conjunto com o Node.js, facilitando no desenvolvimento de aplicações back-en
+
+
+-- Adicionando o Nodemon na aplicação --
+
+yarn add nodemon -D // ambiente de desenvolvimento
+
+
+-- Utilizando os métodos HTTP --
+
+GET - buscar informação do servidor
+POST - inserir informação no servidor
+PUT - alterar informação no servidor
+PATCH - alterar informação no servidor
+DELETE - deletar informação no servidor
+
+
+-- Utilizando o insomnia --
+
+client is a Free Cross-Platform Desktop Framework for testing RESTful applications
+
+-- Tipos de parâmetros --
+
+Routes Params 
+
+    "/courses/:id"
+    "/recurso/:parametro"
+    Identificar um recurso para editar/deletar/buscar
+
+Query Params
+
+    paginação / filtro
+
+Body Params
+
+    objetos parrados para inserção ou alteração (JSON) - app.use(express.json());
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------Node JS------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------- Primeiro projeto com Node.js ---------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Conhecendo os requisitos da aplicação --
+
+index.js
+
+const express = require('express');
+
+const app = express();
+
+app.use(express.json());
+
+app.get("/courses", (request,response) => {
+    const query = request.query;
+    console.log(query);
+    return response.json(["C 1","C 2","C 3"]);
+});
+
+app.post("/courses",(request,response) => {
+    const body = request.body;
+    console.log(body)
+    return response.json(["C 1","C 2","C 3","C 4"]);
+});
+
+app.put("/courses/:id",(request,response) => {
+    const params = request.params;
+    const { id } = request.params;
+    console.log(params)
+    console.log(id)
+    return response.json(["C 6","C 2","C 3","C 4"]);
+});
+
+app.patch("/courses/:id",(request,response) => {
+    return response.json(["C 6","C 7","C 3","C 4"]);
+});
+
+app.delete("/courses/:id",(request,response) => {
+    return response.json(["C 6","C 7","C 4"]);
+});
+
+app.listen(3333);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
